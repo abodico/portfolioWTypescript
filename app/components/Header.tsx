@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -13,7 +14,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-
+import Image from "next/image";
+import logo from "../../public/logo.png";
 interface Props {
   /**
    * Injected by the documentation to work in an iframe.
@@ -35,13 +37,17 @@ export default function DrawerAppBar(props: Props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography>
+      {/* <Typography variant="h6" sx={{ my: 2 }}>
+        Abdalmoamen Abbara
+      </Typography> */}
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem
+            key={item}
+            onClick={() => handleDrawerToggle}
+            disablePadding
+          >
             <ListItemButton sx={{ textAlign: "center" }}>
               <ListItemText primary={item} />
             </ListItemButton>
@@ -57,8 +63,13 @@ export default function DrawerAppBar(props: Props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
+      {/* sm screens */}
       <AppBar component="nav">
-        <Toolbar>
+        <Toolbar
+          sx={{
+            justifyContent: "space-between",
+          }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -68,13 +79,17 @@ export default function DrawerAppBar(props: Props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            Abdalmoamen Abbara
-          </Typography>
+          {/* logo */}
+          <div className="sm:w-52 h-auto w-36">
+            <Image
+              className="max-w-full"
+              src={logo}
+              alt="my-logo"
+              width={200}
+              height={100}
+            />
+          </div>
+          {/* list */}
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <Button key={item} sx={{ color: "#fff" }}>
